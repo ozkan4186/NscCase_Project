@@ -24,13 +24,30 @@ const getTodos = async ()=>{
   }
 }
 
-const addTodo=async (text)=>{
-  const newTodo={
-    title:text,
+const toogleTodo= async (item)=>{
+  try {
+    await axios.put(`${url}/${item._id}`, {
+      ...item,
+      is_completed: !item.is_completed
+    })
+    getTodos()
+  } catch (error) {
+    console.log(error);
     
   }
-
 }
+
+const deleteTodo= async (_id)=>{
+  try {
+    await axios.delete(`${url}/${_id}`);
+    getTodos()
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
 
 useEffect(() => {
    getTodos()
@@ -42,7 +59,7 @@ useEffect(() => {
       <Navbar />
       <div className='flex flex-wrap ' >
         <Sidebar />
-        <TodoList todos={todos} />
+        <TodoList todos={todos} toogleTodo={toogleTodo} deleteTodo={deleteTodo} />
       </div>
     </div>
   );
