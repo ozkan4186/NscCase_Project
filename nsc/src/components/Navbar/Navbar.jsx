@@ -4,7 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 
 const Navbar = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center px-5 py-6 bg-slate-100">
+    <div className="flex  sticky flex-col md:flex-row justify-between items-center px-5 py-6 bg-slate-100">
       <div className="flex flex-col md:flex-row justify-between items-center w-full md:w-1/3 mb-4 md:mb-0">
         <div className="mb-2 md:mb-0 md:mr-4 max-md:mb-3 ">
           <h1 className="text-2xl font-extralight tracking-wider mb-1">
