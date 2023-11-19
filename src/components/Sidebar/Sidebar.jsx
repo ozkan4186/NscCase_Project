@@ -40,8 +40,8 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className=" fixed z-50 bg-red-50 lg:h-screen w-full lg:w-1/4">
-      <div className="p-6 ">
+    <div className="  bg-red-50 md:h-screen   w-full lg:w-1/4">
+      <div className="p-12 ">
         {sidebarMenus.map((item, index) => (
           <Link href={item.link} key={index}>
             <div

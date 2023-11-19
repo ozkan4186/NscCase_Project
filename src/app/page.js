@@ -24,19 +24,26 @@ const getTodos = async ()=>{
   }
 }
 
+const addTodo=async (text)=>{
+  const newTodo={
+    title:text,
+    
+  }
 
+}
 
 useEffect(() => {
    getTodos()
-}, [])
+}, []) 
 
 
   return (
-   <div>
-    <Navbar/>
-    <Sidebar/>
-    <TodoList todos={todos} />
-   </div>
-   
-     )
+    <div>
+      <Navbar />
+      <div className='flex flex-wrap ' >
+        <Sidebar />
+        <TodoList todos={todos} />
+      </div>
+    </div>
+  );
 }
