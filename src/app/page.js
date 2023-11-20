@@ -28,7 +28,7 @@ export default function Home() {
         ...item,
         is_completed: !item.is_completed,
       });
-      // SWR'daki mutate fonksiyonu ile veriyi güncelle
+
       mutate(url);
     } catch (error) {
       console.log(error);
@@ -38,7 +38,7 @@ export default function Home() {
   const deleteTodo = async (_id) => {
     try {
       await axios.delete(`${url}/${_id}`);
-      // SWR'daki mutate fonksiyonu ile veriyi güncelle
+  
       mutate(url);
     } catch (error) {
       console.log(error);

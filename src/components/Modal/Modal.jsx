@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-// Diğer importları eklemeyi unutma
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
