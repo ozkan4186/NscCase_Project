@@ -4,10 +4,10 @@ import TodoResults from '../TodoResults/TodoResults';
 const TodoList = ({todos,toogleTodo,deleteTodo}) => {
     console.log(todos);
   return (
-    <div className="flex  md:mx-auto h-20  w-2/4  flex-wrap  ">
+    <div className="flex  md:mx-auto h-20  px-4 py-3 w-3/4 gap-9 flex-wrap  ">
       {todos.map((item) => {
         return (
-          <div className="flex  p-7  ">
+          <div className="flex gap-2   ">
             <TodoResults key={item.id} item={item} toogleTodo={toogleTodo} deleteTodo={deleteTodo} />
           </div>
         );

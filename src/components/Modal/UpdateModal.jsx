@@ -1,55 +1,26 @@
 "use client"
 import React, { useState } from "react";
+import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 
-const url = "https://6559f7296981238d054cfc28.mockapi.io/Todos";
-
-const Modal = ({ onClose}) => {
-  // Form alanları için başlangıç değerleri
+const UpdateModal = ({ todo, onClose }) => {
   const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    created_up: "",
-    updated_up: "",
+    title: todo.title,
+    description: todo.description,
+    created_up: todo.created_up,
+    updated_up: todo.updated_up,
   });
   
-
-  // API'ye gönderilen veri için durum
-  const [postData, setPostData] = useState(null);
-
-  // Form alanı değişikliklerini takip eden fonksiyon
+const [loading, setLoading] = useState(false);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value,
-    });
+    }));
   };
 
-
-  // Formun gönderilmesini ele alan fonksiyon
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // Form verilerini API'ye göndermek için axios'u kullan
-      const response = await axios.post(url, formData);
-      console.log("Post response:", response.data);
-      // İstek başarıyla tamamlandıktan sonra modalı kapat
-      onClose();
-      setPostData(response.data);
-    } catch (error) {
-      console.error("Post error:", error);
-    }
-  };
-
-  // Form alanına tıklanıldığında modalın kapanmasını engelleyen fonksiyon
-  const handleInputClick = (e) => {
-    e.stopPropagation();
-  };
-
-  // Yup doğrulama şemasını tanımla
   const validationSchema = Yup.object({
     title: Yup.string().required("Başlık zorunludur"),
     description: Yup.string().required("Açıklama zorunludur"),
@@ -57,11 +28,26 @@ const Modal = ({ onClose}) => {
     updated_up: Yup.string().required("Güncelleme Tarihi zorunludur"),
   });
 
+  const handleSubmit = async ( { setSubmitting }) => {
+    try {
+            setLoading(true);
+      // Form verilerini API'ye gönder
+      await axios.put(
+        `https://6559f7296981238d054cfc28.mockapi.io/Todos/${todo._id}`,
+        formData
+      );
+      // İstek başarıyla tamamlandıktan sonra modalı kapat
+      onClose();
+    } catch (error) {
+      console.log(error);  
+    }finally{
+        setLoading(false)
+    }
+    setSubmitting(false);
+  };
+
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center"
-      onClick={onClose}
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute inset-0 bg-gray-800 opacity-75"></div>
       <div className="relative bg-white p-4 max-w-md mx-auto rounded-md">
         <div className="flex justify-end">
@@ -72,24 +58,12 @@ const Modal = ({ onClose}) => {
             Kapat
           </button>
         </div>
-        <div className="mt-4" onClick={handleInputClick}>
+        <div className="mt-4">
           {/* Formik bileşenini kullan */}
           <Formik
             initialValues={formData}
             validationSchema={validationSchema}
-            onSubmit={async (values, { setSubmitting }) => {
-              try {
-                // Form verilerini API'ye gönder
-                const response = await axios.post(url, values);
-                console.log("Post response:", response.data);
-                // İstek başarıyla tamamlandıktan sonra modalı kapat
-                onClose();
-                setPostData(response.data);
-              } catch (error) {
-                console.error("Post error:", error);
-              }
-              setSubmitting(false);
-            }}
+            onSubmit={handleSubmit}
           >
             {/* Formik Form ve Field bileşenlerini kullan */}
             <Form>
@@ -191,8 +165,9 @@ const Modal = ({ onClose}) => {
                 <button
                   type="submit"
                   className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+                  disabled={loading}
                 >
-                  Kaydet
+                  {loading ? "Güncelleniyor..." : "Güncelle"}
                 </button>
               </div>
             </Form>
@@ -203,4 +178,4 @@ const Modal = ({ onClose}) => {
   );
 };
 
-export default Modal;
+export default UpdateModal;
