@@ -8,7 +8,7 @@ const TodoList = ({todos,toogleTodo,deleteTodo}) => {
       {todos.map((item) => {
         return (
           <div className="flex gap-2   ">
-            <TodoResults key={item.id} item={item} toogleTodo={toogleTodo} deleteTodo={deleteTodo} />
+            <TodoResults key={item._id} item={item} toogleTodo={toogleTodo} deleteTodo={deleteTodo} />
           </div>
         );
       })}
