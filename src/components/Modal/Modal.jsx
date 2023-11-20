@@ -1,55 +1,19 @@
 "use client"
 import React, { useState } from "react";
+// Diğer importları eklemeyi unutma
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
 const url = "https://6559f7296981238d054cfc28.mockapi.io/Todos";
 
-const Modal = ({ onClose}) => {
-  // Form alanları için başlangıç değerleri
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    created_up: "",
-    updated_up: "",
-  });
-  
-
-  // API'ye gönderilen veri için durum
+const Modal = ({ onClose }) => {
   const [postData, setPostData] = useState(null);
 
-  // Form alanı değişikliklerini takip eden fonksiyon
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-
-  // Formun gönderilmesini ele alan fonksiyon
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      // Form verilerini API'ye göndermek için axios'u kullan
-      const response = await axios.post(url, formData);
-      console.log("Post response:", response.data);
-      // İstek başarıyla tamamlandıktan sonra modalı kapat
-      onClose();
-      setPostData(response.data);
-    } catch (error) {
-      console.error("Post error:", error);
-    }
-  };
-
-  // Form alanına tıklanıldığında modalın kapanmasını engelleyen fonksiyon
   const handleInputClick = (e) => {
     e.stopPropagation();
   };
 
-  // Yup doğrulama şemasını tanımla
   const validationSchema = Yup.object({
     title: Yup.string().required("Başlık zorunludur"),
     description: Yup.string().required("Açıklama zorunludur"),
@@ -75,7 +39,12 @@ const Modal = ({ onClose}) => {
         <div className="mt-4" onClick={handleInputClick}>
           {/* Formik bileşenini kullan */}
           <Formik
-            initialValues={formData}
+            initialValues={{
+              title: "",
+              description: "",
+              created_up: "",
+              updated_up: "",
+            }}
             validationSchema={validationSchema}
             onSubmit={async (values, { setSubmitting }) => {
               try {
@@ -105,8 +74,6 @@ const Modal = ({ onClose}) => {
                   type="text"
                   id="title"
                   name="title"
-                  value={formData.title}
-                  onChange={handleInputChange}
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                   required
                 />
@@ -128,8 +95,6 @@ const Modal = ({ onClose}) => {
                   as="textarea"
                   id="description"
                   name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
                   rows="3"
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                   required
@@ -152,8 +117,6 @@ const Modal = ({ onClose}) => {
                   type="text"
                   id="created_up"
                   name="created_up"
-                  value={formData.created_up}
-                  onChange={handleInputChange}
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                   required
                 />
@@ -175,8 +138,6 @@ const Modal = ({ onClose}) => {
                   type="text"
                   id="updated_up"
                   name="updated_up"
-                  value={formData.updated_up}
-                  onChange={handleInputChange}
                   className="mt-1 p-2 w-full border border-gray-300 rounded-md"
                   required
                 />
@@ -204,3 +165,197 @@ const Modal = ({ onClose}) => {
 };
 
 export default Modal;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

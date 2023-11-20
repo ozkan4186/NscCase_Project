@@ -57,9 +57,17 @@ useEffect(() => {
   return (
     <div>
       <Navbar />
-      <div className='flex flex-wrap ' >
-        <Sidebar />
-        <TodoList todos={todos} toogleTodo={toogleTodo} deleteTodo={deleteTodo} />
+      <div className="flex flex-wrap ">
+        <Sidebar
+          todos={todos}
+          toogleTodo={toogleTodo}
+          deleteTodo={deleteTodo}
+        />
+        <TodoList
+          todos={todos}
+          toogleTodo={toogleTodo}
+          deleteTodo={deleteTodo}
+        />
       </div>
     </div>
   );
