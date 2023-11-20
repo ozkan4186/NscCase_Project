@@ -31,12 +31,12 @@ const [loading, setLoading] = useState(false);
   const handleSubmit = async ( { setSubmitting }) => {
     try {
             setLoading(true);
-      // Form verilerini API'ye gönder
+  
       await axios.put(
         `https://6559f7296981238d054cfc28.mockapi.io/Todos/${todo._id}`,
         formData
       );
-      // İstek başarıyla tamamlandıktan sonra modalı kapat
+      
       onClose();
     } catch (error) {
       console.log(error);  
@@ -59,15 +59,15 @@ const [loading, setLoading] = useState(false);
           </button>
         </div>
         <div className="mt-4">
-          {/* Formik bileşenini kullan */}
+    
           <Formik
             initialValues={formData}
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {/* Formik Form ve Field bileşenlerini kullan */}
+       
             <Form>
-              {/* Başlık alanı */}
+    
               <div className="mb-4">
                 <label
                   htmlFor="title"
@@ -90,7 +90,7 @@ const [loading, setLoading] = useState(false);
                   className="text-red-500 text-sm"
                 />
               </div>
-              {/* Açıklama alanı */}
+       
               <div className="mb-4">
                 <label
                   htmlFor="description"
@@ -114,7 +114,7 @@ const [loading, setLoading] = useState(false);
                   className="text-red-500 text-sm"
                 />
               </div>
-              {/* Oluşturulma Tarihi alanı */}
+          
               <div className="mb-4">
                 <label
                   htmlFor="created_up"
@@ -137,7 +137,7 @@ const [loading, setLoading] = useState(false);
                   className="text-red-500 text-sm"
                 />
               </div>
-              {/* Güncelleme Tarihi alanı */}
+   
               <div className="mb-4">
                 <label
                   htmlFor="updated_up"
@@ -160,7 +160,7 @@ const [loading, setLoading] = useState(false);
                   className="text-red-500 text-sm"
                 />
               </div>
-              {/* Gönder düğmesi */}
+       
               <div className="flex justify-end">
                 <button
                   type="submit"

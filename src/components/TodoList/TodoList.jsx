@@ -7,8 +7,12 @@ const TodoList = ({todos,toogleTodo,deleteTodo}) => {
     <div className="flex  md:mx-auto h-20  px-24 py-3 w-3/4 gap-12 flex-wrap  ">
       {todos.map((item) => {
         return (
-          <div className="flex gap-2   ">
-            <TodoResults key={item._id} item={item} toogleTodo={toogleTodo} deleteTodo={deleteTodo} />
+          <div key={item._id} className="flex gap-2   ">
+            <TodoResults
+              item={item}
+              toogleTodo={toogleTodo}
+              deleteTodo={deleteTodo}
+            />
           </div>
         );
       })}

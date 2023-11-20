@@ -37,7 +37,7 @@ const Modal = ({ onClose }) => {
           </button>
         </div>
         <div className="mt-4" onClick={handleInputClick}>
-          {/* Formik bileşenini kullan */}
+  
           <Formik
             initialValues={{
               title: "",
@@ -48,10 +48,10 @@ const Modal = ({ onClose }) => {
             validationSchema={validationSchema}
             onSubmit={async (values, { setSubmitting }) => {
               try {
-                // Form verilerini API'ye gönder
+        
                 const response = await axios.post(url, values);
                 console.log("Post response:", response.data);
-                // İstek başarıyla tamamlandıktan sonra modalı kapat
+            
                 onClose();
                 setPostData(response.data);
               } catch (error) {
@@ -60,9 +60,9 @@ const Modal = ({ onClose }) => {
               setSubmitting(false);
             }}
           >
-            {/* Formik Form ve Field bileşenlerini kullan */}
+   
             <Form>
-              {/* Başlık alanı */}
+        
               <div className="mb-4">
                 <label
                   htmlFor="title"
@@ -83,7 +83,7 @@ const Modal = ({ onClose }) => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              {/* Açıklama alanı */}
+     
               <div className="mb-4">
                 <label
                   htmlFor="description"
@@ -105,7 +105,7 @@ const Modal = ({ onClose }) => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              {/* Oluşturulma Tarihi alanı */}
+          
               <div className="mb-4">
                 <label
                   htmlFor="created_up"
@@ -126,7 +126,7 @@ const Modal = ({ onClose }) => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              {/* Güncelleme Tarihi alanı */}
+       
               <div className="mb-4">
                 <label
                   htmlFor="updated_up"
@@ -147,7 +147,7 @@ const Modal = ({ onClose }) => {
                   className="text-red-500 text-sm"
                 />
               </div>
-              {/* Gönder düğmesi */}
+           
               <div className="flex justify-end">
                 <button
                   type="submit"
