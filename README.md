@@ -13,3 +13,4 @@ An interface is provided for adding new todo items.
 Todo items can be deleted from the list.
 Completed todo items can be marked as 'done.'
 The 'Axios' library is employed for making endpoint requests.
+As css, I used swr to update tailwind css http requests and prevent fetching data after refresh.
