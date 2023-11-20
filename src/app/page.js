@@ -1,58 +1,49 @@
 "use client"
-
-import Navbar from '@/components/Navbar/Navbar'
-import Sidebar from '@/components/Sidebar/Sidebar'
-import TodoList from '@/components/TodoList/TodoList';
-import axios from 'axios';
-
-import { useEffect, useState } from 'react';
+import Navbar from "@/components/Navbar/Navbar";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import TodoList from "@/components/TodoList/TodoList";
+import useSWR, { mutate } from "swr";
+import axios from "axios";
 
 const url = "https://6559f7296981238d054cfc28.mockapi.io/Todos";
 
+const fetcher = async (url) => {
+  const response = await axios.get(url);
+  return response.data;
+};
 
 export default function Home() {
-  const [todos, setTodos] = useState([])
-
-
-const getTodos = async ()=>{
-  try {
-    const {data}=await axios.get(url)
-    setTodos(data)
-    console.log(data);
-  } catch (error) {
-    console.log(error);
+  const { data: todos, error } = useSWR(url, fetcher);
+   if (error) {
+    return <div>Hata oluştu</div>;
   }
-}
 
-const toogleTodo= async (item)=>{
-  try {
-    await axios.put(`${url}/${item._id}`, {
-      ...item,
-      is_completed: !item.is_completed
-    })
-    getTodos()
-  } catch (error) {
-    console.log(error);
-    
+  if (!todos) {
+    return <div>Veriler yükleniyor...</div>;
   }
-}
 
-const deleteTodo= async (_id)=>{
-  try {
-    await axios.delete(`${url}/${_id}`);
-    getTodos()
-  } catch (error) {
-    console.log(error);
-  }
-}
+  const toogleTodo = async (item) => {
+    try {
+      await axios.put(`${url}/${item._id}`, {
+        ...item,
+        is_completed: !item.is_completed,
+      });
+      // SWR'daki mutate fonksiyonu ile veriyi güncelle
+      mutate(url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-
-
-
-useEffect(() => {
-   getTodos()
-}, []) 
-
+  const deleteTodo = async (_id) => {
+    try {
+      await axios.delete(`${url}/${_id}`);
+      // SWR'daki mutate fonksiyonu ile veriyi güncelle
+      mutate(url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -72,3 +63,66 @@ useEffect(() => {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
